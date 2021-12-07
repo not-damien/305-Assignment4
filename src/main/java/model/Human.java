@@ -2,7 +2,8 @@ package model;
 
 public class Human extends AbstractVehicle{
 
-    public Human(int i, int i1, Direction north) {
-        super(i, i1, north);
+    public Human(int theX, int theY, Direction theDir) {
+        super(theX, theY,theDir );
     }
+
 }

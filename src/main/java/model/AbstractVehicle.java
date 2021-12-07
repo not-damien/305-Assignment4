@@ -4,7 +4,13 @@ package model;
 import java.util.Map;
 
 public abstract class AbstractVehicle implements Vehicle{
-    public AbstractVehicle(int i, int i1, Direction north) {
+    int myX,myY;
+    boolean isAlive;
+    private Direction myDir;
+
+    public AbstractVehicle(int theX, int theY, Direction north) {
+        myX = theX;
+        myY = theY;
     }
 
     @Override
@@ -34,22 +40,22 @@ public abstract class AbstractVehicle implements Vehicle{
 
     @Override
     public Direction getDirection() {
-        return null;
+        return myDir;
     }
 
     @Override
     public int getX() {
-        return 0;
+        return myX;
     }
 
     @Override
     public int getY() {
-        return 0;
+        return myY;
     }
 
     @Override
     public boolean isAlive() {
-        return false;
+        return isAlive;
     }
 
     @Override
@@ -62,18 +68,20 @@ public abstract class AbstractVehicle implements Vehicle{
 
     }
 
+
+
     @Override
     public void setDirection(Direction theDir) {
-
+            myDir = theDir;
     }
 
     @Override
     public void setX(int theX) {
-
+        myX = theX;
     }
 
     @Override
     public void setY(int theY) {
-
+        myY = theY;
     }
 }

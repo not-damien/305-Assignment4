@@ -1,8 +1,8 @@
 package model;
 
 public class Taxi extends AbstractVehicle {
-    public Taxi(int i, int i1, Direction north) {
-        super(i, i1, north);
+    public Taxi(int theX, int theY, Direction theDir) {
+        super(theX, theY,theDir );
     }
     //TODO
 }

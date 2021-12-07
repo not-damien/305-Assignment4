@@ -1,8 +1,8 @@
 package model;
 
 public class Bicycle extends AbstractVehicle {
-    public Bicycle(int i, int i1, Direction north) {
-        super(i, i1, north);
+    public Bicycle(int theX, int theY, Direction theDir) {
+        super(theX, theY,theDir );
     }
 
     //TODO
