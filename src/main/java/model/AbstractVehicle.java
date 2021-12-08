@@ -7,10 +7,13 @@ public abstract class AbstractVehicle implements Vehicle{
     int myX,myY;
     boolean isAlive;
     private Direction myDir;
+    String myAliveIcon;
+    String myDeathIcon;
 
     public AbstractVehicle(int theX, int theY, Direction north) {
         myX = theX;
         myY = theY;
+        isAlive = true;
     }
 
     @Override
@@ -35,7 +38,10 @@ public abstract class AbstractVehicle implements Vehicle{
 
     @Override
     public String getImageFileName() {
-        return "truck.gif";
+        if(isAlive()){
+            return myAliveIcon;
+        }else
+            return myDeathIcon;
     }
 
     @Override
