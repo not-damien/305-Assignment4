@@ -59,25 +59,6 @@ public class Atv extends AbstractVehicle{
     public void collide(Vehicle theOther) {
     }
 
-    /**
-     * Returns the number of updates between this vehicle's death and when it
-     * should be revived.
-     *
-     * @return the number of updates.
-     */
-    @Override
-    public int getDeathTime() {
-        return 0;
-    }
-
-    /**
-     * Called by the UI to notify a dead vehicle that 1 movement round has
-     * passed, so that it will become 1 move closer to revival.
-     */
-    @Override
-    public void poke() {
-
-    }
 
 
     //TODO

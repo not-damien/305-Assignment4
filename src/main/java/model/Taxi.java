@@ -24,14 +24,6 @@ public class Taxi extends AbstractVehicle {
 
     }
 
-    @Override
-    public int getDeathTime() {
-        return 0;
-    }
 
-    @Override
-    public void poke() {
-
-    }
     //TODO
 }

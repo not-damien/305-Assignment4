@@ -1,6 +1,9 @@
 package model;
 
 import java.util.Map;
+import java.util.Set;
+
+import static model.Terrain.CROSSWALK;
 
 /**
  * Human
@@ -26,31 +29,35 @@ public class Human extends AbstractVehicle{
         super(theX, theY,theDir );
         myAliveIcon = "human.gif";
         myDeathIcon = "human_dead.gif";
+        myDeathTime = 45;
     }
 
 
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight) {
-        return false;
+        return (theLight != Light.GREEN && theTerrain == CROSSWALK) || (theTerrain == Terrain.GRASS);
     }
 
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
-        return null;
-    }
+        Direction[] theDirections = (Direction[]) theNeighbors.keySet().toArray();
+            for(int i = 0; i < theDirections.length;i++){
+               if (theNeighbors.get(theDirections[i]) == CROSSWALK){
+                   return theDirections[i];
+               }if(!theNeighbors.containsValue(CROSSWALK)){
+                   return getDirection();
+                }
+        }
 
+        return getDirection().left();
+
+    }
     @Override
     public void collide(Vehicle theOther) {
-
+        if (theOther.getClass() != this.getClass()){
+            isAlive = false;
+            myDeathTime = 45;
+        }
     }
 
-    @Override
-    public int getDeathTime() {
-        return 0;
-    }
-
-    @Override
-    public void poke() {
-
-    }
 }

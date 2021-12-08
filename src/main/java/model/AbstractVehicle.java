@@ -9,10 +9,12 @@ public abstract class AbstractVehicle implements Vehicle{
     private Direction myDir;
     String myAliveIcon;
     String myDeathIcon;
-    public AbstractVehicle(int theX, int theY, Direction north) {
+    int myDeathTime;
+    public AbstractVehicle(int theX, int theY, Direction theDir) {
         myX = theX;
         myY = theY;
         isAlive = true;
+        myDir = theDir;
     }
     @Override
     public Direction getDirection() {
@@ -57,6 +59,15 @@ public abstract class AbstractVehicle implements Vehicle{
             return myAliveIcon;
         }else
             return myDeathIcon;
+    }
+    @Override
+    public int getDeathTime() {
+        return myDeathTime;
+    }
+
+    @Override
+    public void poke() {
+        myDeathTime--;
     }
 
 }
