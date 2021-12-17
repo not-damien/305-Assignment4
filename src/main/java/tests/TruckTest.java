@@ -24,7 +24,7 @@ public class TruckTest {
      */
     private static final int TRIES_FOR_RANDOMNESS = 50;
 
-    /** Test method for Human constructor. */
+    /** Test method for Truck constructor. */
     @Test
     public void testTruckConstructor() {
         final Truck t = new Truck(10, 11, Direction.NORTH);
@@ -56,13 +56,13 @@ public class TruckTest {
     @Test
     public void testCanPass() {
 
-        // travels only on streets and through lights and crosswalks
+        // travels only on streets and through lights and crosswalks,
         // so we need to test those conditions
 
-        // Trucks should NOT choose to move to other terrain types
+        // Trucks should NOT choose to move to other terrain types,
         // so we need to test that Trucks never move to other terrain types
 
-        // Trucks should only reverse direction if no other option is available
+        // Trucks should only reverse direction if no other option is available,
         // so we need to be sure to test that requirement also
 
         final List<Terrain> validTerrain = new ArrayList<>();

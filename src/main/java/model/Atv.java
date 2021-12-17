@@ -2,6 +2,8 @@ package model;
 
 import java.util.Map;
 
+import static model.Terrain.GRASS;
+
 /**
  * Movement behavior:
  * o Trucks travel only on streets and through lights and crosswalks.
@@ -17,6 +19,7 @@ public class Atv extends AbstractVehicle{
         super(theX, theY,theDir );
         myAliveIcon = "atv.gif";
         myDeathIcon = "atv_dead.gif";
+        myDeathTime = 25;
     }
 
     /**
@@ -30,10 +33,10 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight) {
-        if(theTerrain == Terrain.CROSSWALK && theLight == Light.RED){
+        if (theTerrain == Terrain.WALL) {
             return false;
-        }else{
-            return theTerrain == Terrain.STREET || theTerrain == Terrain.CROSSWALK;
+        } else {
+            return true;
         }
 
     }
@@ -47,7 +50,17 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
-        return null;
+        Direction temp = Direction.random();
+        if(theNeighbors.get(getDirection()) == Terrain.WALL &&
+                theNeighbors.get(getDirection().left()) == Terrain.WALL &&
+                theNeighbors.get(getDirection().right()) == Terrain.WALL) {
+            return getDirection().reverse();
+        }else {
+            while(temp == getDirection().reverse() || theNeighbors.get(temp) == Terrain.WALL ){
+                temp = Direction.random();
+            }
+            return temp;
+        }
     }
 
     /**
@@ -57,6 +70,11 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public void collide(Vehicle theOther) {
+        Class theirClass = theOther.getClass();
+        if(theirClass == Truck.class || theirClass == Car.class || theirClass == Taxi.class ){
+            isAlive = false;
+
+        }
     }
 
     /**
@@ -64,6 +82,9 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public void reset() {
+        isAlive = true;
+        myDeathTime = 25;
+
 
     }
 

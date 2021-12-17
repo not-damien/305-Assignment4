@@ -7,7 +7,7 @@ import java.util.Random;
 public abstract class AbstractVehicle implements Vehicle{
     int myX,myY;
     boolean isAlive;
-    private Direction myDir;
+    protected Direction myDir;
     String myAliveIcon;
     String myDeathIcon;
     int myDeathTime;
@@ -65,6 +65,9 @@ public abstract class AbstractVehicle implements Vehicle{
     @Override
     public void poke() {
         myDeathTime--;
+        if(myDeathTime  == 0 ){
+            reset();
+        }
     }
 
 }
