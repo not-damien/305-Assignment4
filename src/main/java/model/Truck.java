@@ -8,6 +8,7 @@ public class Truck extends AbstractVehicle {
         super(theX, theY,theDir );
         myAliveIcon = "truck.gif";
         myDeathIcon = "truck_dead.gif";
+
     }
 
     /**
@@ -47,22 +48,12 @@ public class Truck extends AbstractVehicle {
     }
 
     /**
-     * Returns the number of updates between this vehicle's death and when it
-     * should be revived.
-     *
-     * @return the number of updates.
+     * Moves this vehicle back to its original position.
      */
     @Override
-    public int getDeathTime() {
-        return 0;
-    }
-
-    /**
-     * Called by the UI to notify a dead vehicle that 1 movement round has
-     * passed, so that it will become 1 move closer to revival.
-     */
-    @Override
-    public void poke() {
+    public void reset() {
 
     }
+
+
 }

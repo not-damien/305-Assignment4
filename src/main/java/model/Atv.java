@@ -59,6 +59,13 @@ public class Atv extends AbstractVehicle{
     public void collide(Vehicle theOther) {
     }
 
+    /**
+     * Moves this vehicle back to its original position.
+     */
+    @Override
+    public void reset() {
+
+    }
 
 
     //TODO

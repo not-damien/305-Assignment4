@@ -34,5 +34,13 @@ public class Bicycle extends AbstractVehicle {
 
     }
 
+    /**
+     * Moves this vehicle back to its original position.
+     */
+    @Override
+    public void reset() {
+
+    }
+
     //TODO
 }

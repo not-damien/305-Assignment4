@@ -1,9 +1,10 @@
 package model;
 
 import java.util.Map;
-import java.util.Set;
 
+import static model.Direction.*;
 import static model.Terrain.CROSSWALK;
+import static model.Terrain.GRASS;
 
 /**
  * Human
@@ -40,18 +41,27 @@ public class Human extends AbstractVehicle{
 
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
-        Direction[] theDirections = (Direction[]) theNeighbors.keySet().toArray();
-            for(int i = 0; i < theDirections.length;i++){
-               if (theNeighbors.get(theDirections[i]) == CROSSWALK){
-                   return theDirections[i];
-               }if(!theNeighbors.containsValue(CROSSWALK)){
-                   return getDirection();
-                }
+        Direction Reverse = getDirection().reverse();
+        if (theNeighbors.containsValue(CROSSWALK)){
+            if(CROSSWALK == theNeighbors.get(NORTH) && Reverse != NORTH)
+                return NORTH;
+            else if(CROSSWALK == theNeighbors.get(SOUTH)&& Reverse != SOUTH)
+                return SOUTH;
+            else if(CROSSWALK == theNeighbors.get(EAST) && Reverse != EAST)
+                return EAST;
+            else if(CROSSWALK == theNeighbors.get(WEST) && Reverse != WEST)
+                return WEST;
+        }else if(theNeighbors.get(getDirection()) != GRASS &&
+                theNeighbors.get(getDirection().left()) != GRASS &&
+                theNeighbors.get(getDirection().right()) != GRASS) {
+            return getDirection().reverse();
         }
-
-        return getDirection().left();
-
-    }
+        Direction temp = random();
+        if (Reverse != temp && theNeighbors.get(temp) == GRASS) {
+                return temp;
+            }
+        return null;
+        }
     @Override
     public void collide(Vehicle theOther) {
         if (theOther.getClass() != this.getClass()){
@@ -59,5 +69,11 @@ public class Human extends AbstractVehicle{
             myDeathTime = 45;
         }
     }
+    @Override
+    public void reset() {
+        isAlive = true;
+        myDeathTime = 45;
+    }
+
 
 }

@@ -34,4 +34,12 @@ public class Car extends AbstractVehicle {
     public void poke() {
 
     }
+
+    /**
+     * Moves this vehicle back to its original position.
+     */
+    @Override
+    public void reset() {
+
+    }
 }

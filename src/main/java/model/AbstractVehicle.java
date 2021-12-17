@@ -2,6 +2,7 @@ package model;
 
 
 import java.util.Map;
+import java.util.Random;
 
 public abstract class AbstractVehicle implements Vehicle{
     int myX,myY;
@@ -10,7 +11,8 @@ public abstract class AbstractVehicle implements Vehicle{
     String myAliveIcon;
     String myDeathIcon;
     int myDeathTime;
-    public AbstractVehicle(int theX, int theY, Direction theDir) {
+    final static Random rando = new Random();
+    protected AbstractVehicle(int theX, int theY, Direction theDir) {
         myX = theX;
         myY = theY;
         isAlive = true;
@@ -20,11 +22,6 @@ public abstract class AbstractVehicle implements Vehicle{
     public Direction getDirection() {
         return myDir;
     }
-    @Override
-    public void reset() {
-       isAlive = true;
-    }
-
 
     @Override
     public boolean isAlive() {
