@@ -1,8 +1,6 @@
 package model;
 
 
-import java.util.Random;
-
 public abstract class AbstractVehicle implements Vehicle{
     int myX,myY;
     boolean isAlive;

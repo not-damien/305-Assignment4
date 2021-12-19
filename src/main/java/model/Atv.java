@@ -2,8 +2,6 @@ package model;
 
 import java.util.Map;
 
-import static model.Terrain.GRASS;
-
 /**
  * Movement behavior:
  * o Trucks travel only on streets and through lights and crosswalks.

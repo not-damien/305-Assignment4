@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class CarTest {//complete
 
@@ -20,7 +19,7 @@ public class CarTest {//complete
         private static final int TRIES_FOR_RANDOMNESS = 50;
 
         /**
-         * Test method for Truck constructor.
+         * Test method for car constructor.
          */
         @Test
         public void testCarConstructor() {
@@ -133,10 +132,10 @@ public class CarTest {//complete
                 boolean seenEast = false;
                 boolean seenSouth = false;
 
-                final Truck truck = new Truck(0, 0, Direction.NORTH);
+                final Car car = new Car(0, 0, Direction.NORTH);
 
                 for (int count = 0; count < TRIES_FOR_RANDOMNESS; count++) {
-                        final Direction d = truck.chooseDirection(neighbors);
+                        final Direction d = car.chooseDirection(neighbors);
 
                         if (d == Direction.WEST) {
                                 seenWest = true;
