@@ -16,7 +16,7 @@ import org.junit.Test;
  *
  * @author Damien Cruz
  */
-public class TruckTest {
+public class TruckTest {//complete
 
     /**
      * The number of times to repeat a test to have a high probability that all

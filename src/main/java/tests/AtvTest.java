@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  *
  * @author Damien Cruz
  */
-public class AtvTest {
+public class AtvTest {//complete
 
     /**
      * The number of times to repeat a test to have a high probability that all
