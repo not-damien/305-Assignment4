@@ -42,26 +42,30 @@ public class Human extends AbstractVehicle{
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         Direction Reverse = getDirection().reverse();
-        if (theNeighbors.containsValue(CROSSWALK)){
-            if(CROSSWALK == theNeighbors.get(NORTH) && Reverse != NORTH)
-                return NORTH;
-            else if(CROSSWALK == theNeighbors.get(SOUTH)&& Reverse != SOUTH)
-                return SOUTH;
-            else if(CROSSWALK == theNeighbors.get(EAST) && Reverse != EAST)
-                return EAST;
-            else if(CROSSWALK == theNeighbors.get(WEST) && Reverse != WEST)
-                return WEST;
-        }else if(theNeighbors.get(getDirection()) != GRASS &&
-                theNeighbors.get(getDirection().left()) != GRASS &&
-                theNeighbors.get(getDirection().right()) != GRASS) {
-            return getDirection().reverse();
-        }
         Direction temp = random();
-        if (Reverse != temp && theNeighbors.get(temp) == GRASS) {
-                return temp;
+        if (theNeighbors.containsValue(CROSSWALK)) {
+            if (CROSSWALK == theNeighbors.get(NORTH) && Reverse != NORTH)
+                return NORTH;
+            else if (CROSSWALK == theNeighbors.get(SOUTH) && Reverse != SOUTH)
+                return SOUTH;
+            else if (CROSSWALK == theNeighbors.get(EAST) && Reverse != EAST)
+                return EAST;
+            else if (CROSSWALK == theNeighbors.get(WEST) && Reverse != WEST)
+                return WEST;
+        } else if (theNeighbors.get(getDirection()) != GRASS && theNeighbors.get(getDirection()) != CROSSWALK &&
+                theNeighbors.get(getDirection().left()) != GRASS && theNeighbors.get(getDirection().left()) != CROSSWALK &&
+                theNeighbors.get(getDirection().right()) != GRASS && theNeighbors.get(getDirection().right()) != CROSSWALK) {
+            return getDirection().reverse();
+        } else {
+            if (temp == Reverse) {
+                if (theNeighbors.get(getDirection()) == GRASS || theNeighbors.get(getDirection()) == CROSSWALK) {
+                    return getDirection();
+                }
+
             }
-        return null;
         }
+        return temp;
+    }
     @Override
     public void collide(Vehicle theOther) {
         if (theOther.getClass() != this.getClass()){
