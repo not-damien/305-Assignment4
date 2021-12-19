@@ -29,7 +29,7 @@ public class Taxi extends AbstractVehicle {
      */
     @Override
     public void reset() {
-
+        super.reset();
     }
 
 

@@ -71,7 +71,7 @@ public class Human extends AbstractVehicle{
     }
     @Override
     public void reset() {
-        isAlive = true;
+        super.reset();
         myDeathTime = 45;
     }
 

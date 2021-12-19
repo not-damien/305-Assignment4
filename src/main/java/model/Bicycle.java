@@ -39,7 +39,7 @@ public class Bicycle extends AbstractVehicle {
      */
     @Override
     public void reset() {
-
+        super.reset();
     }
 
     //TODO

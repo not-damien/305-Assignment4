@@ -52,7 +52,7 @@ public class Truck extends AbstractVehicle {
      */
     @Override
     public void reset() {
-
+        super.reset();
     }
 
 

@@ -82,7 +82,7 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public void reset() {
-        isAlive = true;
+        super.reset();
         myDeathTime = 25;
 
 

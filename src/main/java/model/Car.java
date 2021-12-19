@@ -40,6 +40,6 @@ public class Car extends AbstractVehicle {
      */
     @Override
     public void reset() {
-
+        super.reset();
     }
 }
