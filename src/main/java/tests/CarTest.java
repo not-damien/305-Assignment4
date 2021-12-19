@@ -160,7 +160,7 @@ public class CarTest {//complete
          * Test method for {@link Car#chooseDirection(java.util.Map)}.
          */
         @Test
-        public void testChooseDirectionMustReverse() {//todo not configured for car
+        public void testChooseDirectionMustReverse() {
                 for (final Terrain t : Terrain.values()) {
                         if (t != Terrain.STREET && t != Terrain.CROSSWALK && t != Terrain.LIGHT) {
 
