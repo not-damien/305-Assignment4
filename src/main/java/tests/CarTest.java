@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-public class CarTest {//todo copy pasted from truck test
+public class CarTest {//complete
 
         /**
          * The number of times to repeat a test to have a high probability that all
@@ -19,7 +19,9 @@ public class CarTest {//todo copy pasted from truck test
          */
         private static final int TRIES_FOR_RANDOMNESS = 50;
 
-        /** Test method for Truck constructor. */
+        /**
+         * Test method for Truck constructor.
+         */
         @Test
         public void testCarConstructor() {
                 final Car t = new Car(10, 11, Direction.NORTH);
@@ -32,7 +34,9 @@ public class CarTest {//todo copy pasted from truck test
                 assertTrue("Car isAlive() fails initially!", t.isAlive());
         }
 
-        /** Test method for Car setters. */
+        /**
+         * Test method for Car setters.
+         */
         @Test
         public void testCarSetters() {
                 final Car h = new Car(10, 11, Direction.NORTH);
@@ -51,7 +55,7 @@ public class CarTest {//todo copy pasted from truck test
         @Test
         public void testCanPass() {
 
-                //only travels on streets and through lights and crosswalks
+                //only travels on streets and through lights and crosswalks,
                 // so we need to test those conditions
 
 
@@ -92,12 +96,12 @@ public class CarTest {//todo copy pasted from truck test
                                                         car.canPass(destinationTerrain,
                                                                 currentLightCondition));
                                         }
-                                }else if(destinationTerrain == Terrain.LIGHT){
-                                        if(currentLightCondition == Light.RED){//cars stop for red traffic lights
-                                                assertFalse("cars should not be able to travel"+ destinationTerrain
-                                                + " ,with Light" + currentLightCondition,
-                                                        car.canPass(destinationTerrain,currentLightCondition));
-                                        }else{
+                                } else if (destinationTerrain == Terrain.LIGHT) {
+                                        if (currentLightCondition == Light.RED) {//cars stop for red traffic lights
+                                                assertFalse("cars should not be able to travel" + destinationTerrain
+                                                                + " ,with Light" + currentLightCondition,
+                                                        car.canPass(destinationTerrain, currentLightCondition));
+                                        } else {
                                                 assertTrue("Cars should be able to pass " + destinationTerrain
                                                                 + ", with light " + currentLightCondition,
                                                         car.canPass(destinationTerrain,
@@ -117,11 +121,11 @@ public class CarTest {//todo copy pasted from truck test
          * Test method for {@link Car#chooseDirection(java.util.Map)}.
          */
         @Test
-        public void testChooseDirectionSurroundedByStreet() {//todo not configured for car yet
-                final Map<Direction, Terrain> neighbors = new HashMap<Direction, Terrain>();
-                neighbors.put(Direction.WEST, Terrain. STREET);
+        public void testDriveForwardSurroundedByStreet() {
+                final Map<Direction, Terrain> neighbors = new HashMap<>();
+                neighbors.put(Direction.WEST, Terrain.STREET);
                 neighbors.put(Direction.NORTH, Terrain.STREET);
-                neighbors.put(Direction.EAST, Terrain. STREET);
+                neighbors.put(Direction.EAST, Terrain.STREET);
                 neighbors.put(Direction.SOUTH, Terrain.STREET);
 
                 boolean seenWest = false;
@@ -145,38 +149,74 @@ public class CarTest {//todo copy pasted from truck test
                         }
                 }
 
-                assertTrue("Truck chooseDirection() fails to select randomly "
-                                + "among all possible valid choices!",
-                        seenWest && seenNorth && seenEast);
+                assertTrue("The car failed to go straight",
+                        seenNorth);
 
-                assertFalse("Truck chooseDirection() reversed direction when not necessary!",
-                        seenSouth);
+                assertFalse("car chose not to go straight when possible!",
+                        seenSouth || seenEast || seenWest);
         }
 
 
         /**
-         * Test method for {@link Truck#chooseDirection(java.util.Map)}.
+         * Test method for {@link Car#chooseDirection(java.util.Map)}.
          */
         @Test
         public void testChooseDirectionMustReverse() {//todo not configured for car
-
                 for (final Terrain t : Terrain.values()) {
                         if (t != Terrain.STREET && t != Terrain.CROSSWALK && t != Terrain.LIGHT) {
 
-                                final Map<Direction, Terrain> neighbors = new HashMap<Direction, Terrain>();
+                                final Map<Direction, Terrain> neighbors = new HashMap<>();
                                 neighbors.put(Direction.WEST, t);
                                 neighbors.put(Direction.NORTH, t);
                                 neighbors.put(Direction.EAST, t);
                                 neighbors.put(Direction.SOUTH, Terrain.STREET);
 
-                                final Truck truck = new Truck(0, 0, Direction.NORTH);
-
+                                final Car car = new Car(0, 0, Direction.NORTH);
                                 // the Human must reverse and go SOUTH
-                                assertEquals("Truck chooseDirection() failed "
+                                assertEquals("Car chooseDirection() failed "
                                                 + "when reverse was the only valid choice!",
-                                        Direction.SOUTH, truck.chooseDirection(neighbors));
+                                        Direction.SOUTH, car.chooseDirection(neighbors));
                         }
 
+                }
+        }
+
+        @Test
+        public void goLeft() {
+                for (final Terrain t : Terrain.values()) {
+                        if (t != Terrain.STREET && t != Terrain.CROSSWALK && t != Terrain.LIGHT) {
+
+                                final Map<Direction, Terrain> neighbors = new HashMap<>();
+                                neighbors.put(Direction.WEST, Terrain.STREET);
+                                neighbors.put(Direction.NORTH, t);
+                                neighbors.put(Direction.EAST, Terrain.STREET);
+                                neighbors.put(Direction.SOUTH, Terrain.STREET);
+
+                                final Car car = new Car(0, 0, Direction.NORTH);
+                                // the Human must reverse and go SOUTH
+                                assertEquals("Car chooseDirection() failed "
+                                                + "left was the best option and the car did not go left!",
+                                        Direction.WEST, car.chooseDirection(neighbors));
+                        }
+                }
+        }
+        @Test
+        public void goRight(){
+                for (final Terrain t : Terrain.values()) {
+                        if (t != Terrain.STREET && t != Terrain.CROSSWALK && t != Terrain.LIGHT) {
+
+                                final Map<Direction, Terrain> neighbors = new HashMap<>();
+                                neighbors.put(Direction.WEST, t);
+                                neighbors.put(Direction.NORTH, t);
+                                neighbors.put(Direction.EAST, Terrain.STREET);
+                                neighbors.put(Direction.SOUTH, Terrain.STREET);
+
+                                final Car car = new Car(0, 0, Direction.NORTH);
+                                // the Human must reverse and go SOUTH
+                                assertEquals("Car chooseDirection() failed "
+                                                + "Right was the best option and the car did not go Right",
+                                        Direction.EAST, car.chooseDirection(neighbors));
+                        }
                 }
         }
 }
