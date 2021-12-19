@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Truck extends AbstractVehicle {
@@ -14,7 +16,9 @@ public class Truck extends AbstractVehicle {
     /**
      * Returns whether or not this object may move onto the given type of
      * terrain, when the street lights are the given color.
-     *
+     * Trucks can drive on Streets and through lights and crosswalks
+     *Truck dont stop for traffic lights
+     * trucks will not pass through crosswalks with red lights
      * @param theTerrain The terrain.
      * @param theLight   The light color.
      * @return whether or not this object may move onto the given type of
@@ -22,6 +26,17 @@ public class Truck extends AbstractVehicle {
      */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight) {
+        final List<Terrain> validTerrain = new ArrayList<>();
+        validTerrain.add(Terrain.STREET);
+        validTerrain.add(Terrain.LIGHT);
+        validTerrain.add(Terrain.CROSSWALK);
+        if(validTerrain.contains(theTerrain)){
+            if(theTerrain == Terrain.CROSSWALK){
+                return theLight != Light.RED;
+            }else{
+                return true;
+            }
+        }
         return false;
     }
 
@@ -34,7 +49,20 @@ public class Truck extends AbstractVehicle {
      */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
-        return null;
+        final List<Terrain> validTerrain = new ArrayList<>();
+        validTerrain.add(Terrain.STREET);
+        validTerrain.add(Terrain.LIGHT);
+        validTerrain.add(Terrain.CROSSWALK);
+        if(!(validTerrain.contains(theNeighbors.get(getDirection())) &&
+                validTerrain.contains((theNeighbors.get(getDirection().left()))) &&
+                validTerrain.contains((theNeighbors.get(getDirection().right()))))){
+            return getDirection().reverse();
+        }
+        Direction temp = Direction.random();
+        while(temp == getDirection().reverse() || !validTerrain.contains(theNeighbors.get(temp))){
+            temp = Direction.random();
+        }
+        return temp;
     }
 
     /**
@@ -44,16 +72,9 @@ public class Truck extends AbstractVehicle {
      */
     @Override
     public void collide(Vehicle theOther) {
-
+        //survives
     }
 
-    /**
-     * Moves this vehicle back to its original position.
-     */
-    @Override
-    public void reset() {
-        super.reset();
-    }
 
 
 }
