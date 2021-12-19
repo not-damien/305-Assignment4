@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class TaxiTest {//todo
+public class TaxiTest {//complete
     private static final int TRIES_FOR_RANDOMNESS = 50;
     @Test
     public void testTaxiConstructor() {
