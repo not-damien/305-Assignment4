@@ -9,13 +9,12 @@ import java.util.Random;
 /**
  * An enumeration (and associated functionality) for directions in which a
  * vehicle may travel.
- * 
+ *
  * @author Marty Stepp
  * @author Daniel M. Zimmerman
  * @author Alan Fowler (acfowler@u.washington.edu)
  * @version 1.1
  */
-
 public enum Direction {
 
     /**
@@ -63,10 +62,9 @@ public enum Direction {
 
     /**
      * Returns the Direction represented by the given letter.
-     * 
+     *
      * @param theLetter The letter.
-     * @return the Direction represented by the given letter, or null if no
-     *         Direction is represented by the given letter.
+     * @return the Direction represented by the given letter, or null if no         Direction is represented by the given letter.
      */
     public static Direction valueOf(final char theLetter) {
         Direction result = null;
@@ -83,7 +81,7 @@ public enum Direction {
 
     /**
      * Returns the letter corresponding to this direction.
-     * 
+     *
      * @return the letter corresponding to this direction.
      */
     public char letter() {
@@ -93,9 +91,8 @@ public enum Direction {
     /**
      * Returns the direction you get if you rotate this direction
      * counter-clockwise by 90 degrees.
-     * 
-     * @return the direction you get if you rotate this direction
-     *         counter-clockwise by 90 degrees.
+     *
+     * @return the direction you get if you rotate this direction         counter-clockwise by 90 degrees.
      */
     public Direction left() {
         Direction result = null;
@@ -126,7 +123,7 @@ public enum Direction {
 
     /**
      * Returns a random Direction.
-     * 
+     *
      * @return a random Direction.
      */
     public static Direction random() {
@@ -136,9 +133,8 @@ public enum Direction {
     /**
      * Returns the direction you get if you rotate this direction clockwise by
      * 90 degrees.
-     * 
-     * @return the direction you get if you rotate this direction clockwise by
-     *         90 degrees.
+     *
+     * @return the direction you get if you rotate this direction clockwise by         90 degrees.
      */
     public Direction right() {
         Direction result = null;
@@ -169,7 +165,7 @@ public enum Direction {
 
     /**
      * Returns the direction opposite this one.
-     * 
+     *
      * @return the direction opposite this one.
      */
     public Direction reverse() {
@@ -179,7 +175,7 @@ public enum Direction {
     /**
      * Returns the change in x-coordinate by moving one space in this direction
      * (for example, WEST would be -1, and NORTH would be 0).
-     * 
+     *
      * @return the change in x-coordinate.
      */
     public int dx() {
@@ -203,7 +199,7 @@ public enum Direction {
     /**
      * Returns the change in y-coordinate by moving one space in this direction
      * (for example, WEST would be 0, and NORTH would be -1).
-     * 
+     *
      * @return the change in y-coordinate.
      */
     public int dy() {

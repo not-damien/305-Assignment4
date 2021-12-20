@@ -6,13 +6,12 @@ package model;
 
 /**
  * An enumeration of traffic light statuses.
- * 
+ *
  * @author Marty Stepp
  * @author Daniel M. Zimmerman
  * @author Alan Fowler (acfowler@u.washington.edu)
  * @version 1.1
  */
-
 public enum Light {
     /**
      * Green means go.
@@ -32,7 +31,7 @@ public enum Light {
     /**
      * Returns the next light in sequence after this one. The sequence is GREEN,
      * YELLOW, RED.
-     * 
+     *
      * @return the next light in sequence.
      */
     public Light advance() {

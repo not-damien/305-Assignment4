@@ -4,9 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Bicycle.
+ */
 public class Bicycle extends AbstractVehicle {
+    /**
+     * The Valid terrain.
+     */
     final List<Terrain> validTerrain = new ArrayList<>();
 
+    /**
+     * Instantiates a new Bicycle.
+     *
+     * @param theX   the x starting value
+     * @param theY   the y starting value
+     * @param theDir the dir starting value
+     */
     public Bicycle(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "bicycle.gif";
@@ -18,6 +31,14 @@ public class Bicycle extends AbstractVehicle {
         validTerrain.add(Terrain.TRAIL);
     }
 
+    /**
+     * bikes will only pass streets lights crosswalks and trails
+     *only will go through green lights
+     *
+     * @param theTerrain The terrain.
+     * @param theLight The light color.
+     * @return true if bike can pass based on parameters
+     */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight){
         if(validTerrain.contains(theTerrain)){
@@ -30,6 +51,13 @@ public class Bicycle extends AbstractVehicle {
         return false;
     }
 
+    /**
+     * bikes will always prefer trails unless the trail is in the reverse direction
+     * if there are no options a bike will reverse
+     * bikes preferences are trails not in reverse > forward > left > right > reverse
+     * @param theNeighbors The map of neighboring terrain.
+     * @return the direction chosen based on parameters
+     */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         Terrain forward = theNeighbors.get(getDirection());

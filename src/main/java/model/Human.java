@@ -27,8 +27,18 @@ import static model.Terrain.GRASS;
  * 45 moves.
  */
 public class Human extends AbstractVehicle{
+    /**
+     * The Valid terrain.
+     */
     final List<Terrain> validTerrain = new ArrayList<>();
 
+    /**
+     * Instantiates a new Human.
+     *
+     * @param theX   the the x
+     * @param theY   the the y
+     * @param theDir the the dir
+     */
     public Human(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "human.gif";
@@ -38,12 +48,29 @@ public class Human extends AbstractVehicle{
         validTerrain.add(Terrain.CROSSWALK);
     }
 
-
+    /**
+     * Returns whether this object may move onto the given type of
+     * terrain, when the streetlights are the given color.
+     *humans ony can pass grass and crosswalks and stop at green lights
+     *
+     * @param theTerrain The terrain.
+     * @param theLight The light color.
+     * @return whether this object may move onto the given type of
+     *         terrain when the streetlights are the given color.
+     */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight) {
         return (theLight != Light.GREEN && theTerrain == CROSSWALK) || (theTerrain == Terrain.GRASS);
     }
 
+    /**
+     * humans will randomly choose to go forward left or right
+     * will only reverse as a last option
+     * will always go towards crosswalks unless the crosswalk is in the reverse direction
+     *
+     * @param theNeighbors The map of neighboring terrain.
+     * @return the chosen direction
+     */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         Direction Reverse = getDirection().reverse();
@@ -68,15 +95,10 @@ public class Human extends AbstractVehicle{
     }
 
 
-
-
-
-
-
-
-
-
-
+    /**
+     * humans will die if hit by any other vehicle that is not also a human
+     * @param theOther The other object.
+     */
     @Override
     public void collide(Vehicle theOther) {
         if (theOther.getClass() != this.getClass()){
@@ -84,6 +106,10 @@ public class Human extends AbstractVehicle{
             myDeathTime = 45;
         }
     }
+
+    /**
+     * resets the object back to its starting position and resets its life
+     */
     @Override
     public void reset() {
         super.reset();

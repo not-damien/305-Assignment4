@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Car.
+ */
 public class Car extends AbstractVehicle {
 
+    /**
+     * Instantiates a new Car.
+     *
+     * @param theX   the the x
+     * @param theY   the the y
+     * @param theDir the the dir
+     */
     public Car(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "car.gif";
@@ -13,6 +23,15 @@ public class Car extends AbstractVehicle {
         myDeathTime = 15;
     }
 
+    /**
+     * cars only drive on streets and through lights and crosswalks
+     * cars stop at red lights
+     * cars only go through green lights
+     *
+     * @param theTerrain The terrain.
+     * @param theLight The light color.
+     * @return true is the car caan pass
+      */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight){
         final List<Terrain> validTerrain = new ArrayList<>();
@@ -34,6 +53,11 @@ public class Car extends AbstractVehicle {
         }
     }
 
+    /**
+     * cars prefer forward > left > right > reverse
+     * @param theNeighbors The map of neighboring terrain.
+     * @return the chosen direction
+     */
     @Override
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         final List<Terrain> validTerrain = new ArrayList<>();
@@ -53,6 +77,10 @@ public class Car extends AbstractVehicle {
         return getDirection().reverse();
     }
 
+    /**
+     * cars will only die if hit by a truck
+     * @param theOther The other object.
+     */
     @Override
     public void collide(Vehicle theOther) {
         if (theOther.getClass().getSimpleName().equalsIgnoreCase( "truck")){
@@ -60,9 +88,6 @@ public class Car extends AbstractVehicle {
         }
 
     }
-
-
-
     /**
      * Moves this vehicle back to its original position.
      */

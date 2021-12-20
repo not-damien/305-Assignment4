@@ -3,16 +3,18 @@ package model;
 import java.util.Map;
 
 /**
- * Movement behavior:
- * o Trucks travel only on streets and through lights and crosswalks.
- * o Trucks randomly select to go straight, turn left, or turn right.  As a last resort, if none of these three
- * directions is legal (all not streets, lights, or crosswalks), the truck turns around.
- * o Trucks drive through all traffic lights without stopping!
- * o Trucks  stop  for  red  crosswalk  lights  but  drive  through  yellow  or  green  crosswalk  lights  without
- * stopping.
- * • Collision behavior: A truck survives a collision with anything, living or dead.
+ * ATVs have a starting heath of 25
+ * Class for vehicles of type ATV
  */
 public class Atv extends AbstractVehicle{
+
+    /**
+     * Instantiates a new Atv.
+     *
+     * @param theX   the the x
+     * @param theY   the the y
+     * @param theDir the the dir
+     */
     public Atv(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "atv.gif";
@@ -23,7 +25,7 @@ public class Atv extends AbstractVehicle{
     /**
      * Returns whether or not this object may move onto the given type of
      * terrain, when the street lights are the given color.
-     *
+     *ATVS Ignore lights and drive on all terrain expect walls
      * @param theTerrain The terrain.
      * @param theLight   The light color.
      * @return whether or not this object may move onto the given type of
@@ -38,6 +40,9 @@ public class Atv extends AbstractVehicle{
     /**
      * Returns the direction this object would like to move, based on the given
      * map of the neighboring terrain.
+     * ATVs will only reverse when forward left and right are not an option
+     * ATVs will not drive on walls
+     * ATVS will randomly go forward left or right
      *
      * @param theNeighbors The map of neighboring terrain.
      * @return the direction this object would like to move.
@@ -59,7 +64,7 @@ public class Atv extends AbstractVehicle{
 
     /**
      * Called when this Vehicle collides with the specified other Vehicle.
-     *
+     *Atvs die when colliding with trucks, cars or taxis
      * @param theOther The other object.
      */
     @Override

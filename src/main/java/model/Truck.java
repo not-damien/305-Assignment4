@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Truck.
+ */
 public class Truck extends AbstractVehicle {
 
+    /**
+     * Instantiates a new Truck.
+     *
+     * @param theX   the the x
+     * @param theY   the the y
+     * @param theDir the the dir
+     */
     public Truck(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "truck.gif";
