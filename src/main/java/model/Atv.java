@@ -83,8 +83,6 @@ public class Atv extends AbstractVehicle{
     public void reset() {
         super.reset();
         myDeathTime = 25;
-
-
     }
 
 }
