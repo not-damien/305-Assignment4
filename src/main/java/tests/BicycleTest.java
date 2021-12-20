@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
-public class BicyleTest {
+public class BicycleTest {
     //can travel on streets and through lights and crosswalk lights, but they prefer to travel on trails.
     // If the terrain in front of a bicycle is a trail, the bicycle always goes straight ahead in the direction it is
     //facing.

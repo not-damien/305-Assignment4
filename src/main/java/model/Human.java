@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static model.Direction.*;
@@ -25,12 +27,15 @@ import static model.Terrain.GRASS;
  * 45 moves.
  */
 public class Human extends AbstractVehicle{
+    final List<Terrain> validTerrain = new ArrayList<>();
 
     public Human(int theX, int theY, Direction theDir) {
         super(theX, theY,theDir );
         myAliveIcon = "human.gif";
         myDeathIcon = "human_dead.gif";
         myDeathTime = 45;
+        validTerrain.add(Terrain.GRASS);
+        validTerrain.add(Terrain.CROSSWALK);
     }
 
 
@@ -43,29 +48,35 @@ public class Human extends AbstractVehicle{
     public Direction chooseDirection(Map<Direction, Terrain> theNeighbors) {
         Direction Reverse = getDirection().reverse();
         Direction temp = random();
-        if (theNeighbors.containsValue(CROSSWALK)) {
-            if (CROSSWALK == theNeighbors.get(NORTH) && Reverse != NORTH)
-                return NORTH;
-            else if (CROSSWALK == theNeighbors.get(SOUTH) && Reverse != SOUTH)
-                return SOUTH;
-            else if (CROSSWALK == theNeighbors.get(EAST) && Reverse != EAST)
-                return EAST;
-            else if (CROSSWALK == theNeighbors.get(WEST) && Reverse != WEST)
-                return WEST;
-        } else if (theNeighbors.get(getDirection()) != GRASS && theNeighbors.get(getDirection()) != CROSSWALK &&
-                theNeighbors.get(getDirection().left()) != GRASS && theNeighbors.get(getDirection().left()) != CROSSWALK &&
-                theNeighbors.get(getDirection().right()) != GRASS && theNeighbors.get(getDirection().right()) != CROSSWALK) {
-            return getDirection().reverse();
-        } else {
-            if (temp == Reverse) {
-                if (theNeighbors.get(getDirection()) == GRASS || theNeighbors.get(getDirection()) == CROSSWALK) {
-                    return getDirection();
+        if(theNeighbors.containsValue(CROSSWALK)){
+            for(final Direction d: Direction.values()){
+                if(theNeighbors.get(d) == CROSSWALK && d != Reverse){
+                    return d;
                 }
-
             }
         }
-        return temp;
+        Terrain forward = theNeighbors.get(getDirection());
+        Terrain left = theNeighbors.get(getDirection().left());
+        Terrain right = theNeighbors.get(getDirection().right());
+        if(validTerrain.contains(forward) || validTerrain.contains(left) || validTerrain.contains(right)){
+            while(temp == Reverse || !validTerrain.contains(theNeighbors.get(temp))){
+                temp = Direction.random();
+            }
+            return temp;
+        }
+        return Reverse;
     }
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void collide(Vehicle theOther) {
         if (theOther.getClass() != this.getClass()){

@@ -31,11 +31,7 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public boolean canPass(Terrain theTerrain, Light theLight) {
-        if (theTerrain == Terrain.WALL) {
-            return false;
-        } else {
-            return true;
-        }
+        return theTerrain != Terrain.WALL;
 
     }
 
@@ -68,7 +64,7 @@ public class Atv extends AbstractVehicle{
      */
     @Override
     public void collide(Vehicle theOther) {
-        Class theirClass = theOther.getClass();
+        Class<? extends Vehicle> theirClass = theOther.getClass();
         if(theirClass == Truck.class || theirClass == Car.class || theirClass == Taxi.class ){
             isAlive = false;
 

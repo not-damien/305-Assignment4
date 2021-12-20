@@ -25,9 +25,8 @@ public class Taxi extends Car {
 
             if(theTerrain == Terrain.CROSSWALK){
                 return theLight != Light.RED;
-            }if (theTerrain == Terrain.STREET){
-                return true;
             }
+            return theTerrain == Terrain.STREET;
         }
         return false;
     }
